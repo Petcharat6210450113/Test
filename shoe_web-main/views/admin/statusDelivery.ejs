@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/propper/popper.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <%- include ../Layout/NavbarAdmin %>
+        <div class="text-center mt-4 mb-4">
+            <h1>สถานะการจัดส่ง</h1>
+        </div>
+        <div class="text-center" style="margin-bottom: 5%;">
+            <table class="table">
+                <thead style="font-size: 22px;">
+                    <tr>
+                        <th scope="col">หมายเลขออเดอร์</th>
+                        <th scope="col">หลักฐานการโอน</th>
+                        <th scope="col">เลขพัสดุ</th>
+                        <th scope="col">สถานะการส่ง</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 20px;">
+                    <% for(let i = 0; i < orderList.length; i++) { %>
+                    <tr>
+                        <th scope="row"><a href="/admin/status/detail/<%= orderIDList[i] %>"><%= orderList[i].OrderNumber %></a></th>
+                        <td><img style="width: 150px;" src="<%= orderList[i].Slip %>"></td>
+                        <td><%= orderList[i].TrackingNumber %></td>
+                        <td><%= orderList[i].Status %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <%- include ../Layout/Footer %>
+</body>
+
+</html>

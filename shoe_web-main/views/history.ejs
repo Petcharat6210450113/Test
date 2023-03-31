@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/propper/popper.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <%- include layout/NavBar %>
+        <div class="container">
+            <div class="text-center mt-4">
+                <h1>ประวัติการสั่งซื้อ</h1>
+            </div>
+            <table class="table mt-4 mb-4">
+                <thead>
+                    <tr>
+                        <th scope="col">ชื่อสินค้า</th>
+                        <th scope="col">ราคาทั้งหมด</th>
+                        <th scope="col">วันที่สั่งออเดอร์</th>
+                        <th scope="col">สถานะ</th>
+                        <th scope="col">เลขพัสดุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < orderList.length; i++) { %>
+                    <tr>
+                        <td><%= orderList[i].ProductName %></td>
+                        <td><%= orderList[i].Price %>฿</td>
+                        <td><%= orderList[i].Date %> <%= orderList[i].Time %></td>
+                        <td><%= orderList[i].Status %></td>
+                        <td><%= orderList[i].TrackingNumber %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <%- include Layout/Footer %>
+</body>
+
+</html>

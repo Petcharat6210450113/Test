@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/propper/popper.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <%- include layout/NavBar %>
+        <h1 class="text-center" style="margin-top: 2%; margin-bottom: 2%;">ตะกร้าสินค้า</h1>
+        <table class="table">
+            <thead style="font-size: 22px;">
+                <tr>
+                    <th scope="col" style="padding-left: 2%;">ลำดับ</th>
+                    <th scope="col">รูปสินค้า</th>
+                    <th scope="col">รายละเอียดสินค้า</th>
+                    <th scope="col">ราคา</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 20px;">
+                <form action="" method="post" id="formCart">
+                    <% for(let i=0; i < cartList.length; i++) { %>
+                        <tr>
+                            <th scope="row" style="padding-left: 2%;">
+                                <%= i+1 %>
+                            </th>
+                            <td><img style="width: 150px;" src="<%= cartList[i].Image %>"></td>
+                            <td>
+                                <p>ชื่อสินค้า: <%= cartList[i].Name %>
+                                </p>
+                                <p>ไซส์: <%= cartList[i].Size %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>ราคารองเท้า: <%= cartList[i].Price %> บาท</p>
+                                <p>ราคาหนัง <%= cartList[i].LeatherCount %> ส่วน: <%= cartList[i].LeatherPrice %> บาท
+                                </p>
+                                <p>ราคาสีผ้าใบ <%= cartList[i].ColorCount %> ส่วน: <%= cartList[i].ColorPrice %> บาท</p>
+                            </td>
+                            <td><button class="btn btn-danger" type="button" onclick="deleteCart('<%= cartIDList[i] %>')">ลบ</button></td>
+                        </tr>
+                        <% } %>
+                </form>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+                <p style="font-size: 25px;">รวมทั้งหมด: <%= total %> บาท</p>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-bottom: 5%;">
+            <button class="btn" type="button" onclick="location.href = '/user/checkout'"
+                style="margin-top: 2%; background-color: darkgray; font-size: 25px; border-radius: 30px; color: white; padding: 0.3% 5%;">เช็คเอ้าท์</button>
+        </div>
+
+        <%- include Layout/Footer %>
+
+            <script>
+                function deleteCart(docId) {
+                    if (confirm("ยืนยันที่จะลบสินค้าชิ้นนี้หรือไม่?")) {
+                        document.getElementById("formCart").action = "/user/deleteCart/" + docId
+                        document.getElementById("formCart").submit();
+                    }
+                }
+            </script>
+</body>
+
+</html>
